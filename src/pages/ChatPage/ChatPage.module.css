@@ -1,0 +1,9 @@
+.mainWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.messagesWrapper {
+    width: 80%;
+}

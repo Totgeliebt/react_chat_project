@@ -1,13 +1,21 @@
 import styles from './MainInput.module.css'
-import React from 'react'
+import React, {useState} from 'react'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+const eye = <FontAwesomeIcon icon={faEye} />;
 
- const MainInput = ({type, placeholderValue, isShowing, icon, width, height}) => {
-
+ const MainInput = ({placeholderValue, hasEye, icon, width, height, style}) => {
+     const [isContentShown, setIsContentShown] = useState(true);
+     const togglePasswordVisiblity = () => {
+         setIsContentShown(!isContentShown);
+     };
 
     return (
-        <div className={styles.inputContainer}><div className={styles.iconContainer} >
+        <div style={style} className={styles.inputContainer}><div className={styles.iconContainer} >
             <img width={width} height={height} src={icon} alt={''}/></div>
-            <input type={type} placeholder={placeholderValue} visibility={isShowing}/>
+            <input type={isContentShown ? "text" : "password"}
+                   placeholder={placeholderValue}/>
+                   {hasEye && <i onClick={togglePasswordVisiblity}>{eye}</i>}
             </div>
     )
  }

@@ -1,8 +1,8 @@
 import styles from './MainButton.module.css'
-const MainButton = () => {
+const MainButton = ({text}) => {
 
     return (
-        <button>Зарегистрироваться</button>
+        <button className={styles.button}>{text}</button>
     )
 }
 
