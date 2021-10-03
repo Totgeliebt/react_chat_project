@@ -1,15 +1,15 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import SliceNameReducer from '../features/slice'
+import {addUserData} from '../features/userDataSlice'
 import storage from 'redux-persist/lib/storage'
 import {persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
-
+import {logger} from 'redux-logger'
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
 }
 const rootReducer = combineReducers({
-    sliceName: SliceNameReducer
+    addUserData: addUserData
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -21,9 +21,9 @@ const store = configureStore({
         serializedCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-    }),
+    }).concat(logger)
 })
-let persistor = persistStore(store)
+const persistor = persistStore(store)
 
 
 export {persistor, store}
