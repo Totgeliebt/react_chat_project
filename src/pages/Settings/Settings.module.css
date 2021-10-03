@@ -1,0 +1,62 @@
+.settingsWrapper {
+    display: flex;
+    min-height: 1114px;
+}
+.imageContainer {
+
+    flex: 2;
+    background: linear-gradient(90deg, rgb(42, 139, 242) 50%, rgb(10, 108, 214) 100%);
+}
+.settingsContainer {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+.inputContainer {
+    position: relative;
+}
+.input {
+    margin: 20px;
+    width: 70%;
+    border-radius: 15px;
+}
+.pencil{
+    background: no-repeat url('./pencilImg.png');
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 40%;
+    right: 30%;
+}
+::placeholder {
+
+}
+.buttonSaveChanges {
+    width: 375px;
+    height: 85px;
+    border-radius: 10px;
+    margin: 20px;
+    background: linear-gradient(206.57deg, #6476F4 0%, #3246D3 83.33%);
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+}
+.userAvatarImg {
+    width: 243px;
+    height: 243px;
+    margin-top: 100px;
+}
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.imageText {
+    position: absolute;
+    top: 33%;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: underline;
+}

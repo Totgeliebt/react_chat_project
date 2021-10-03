@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './App.css';
+import RegistrationForm from "./pages/RegistrationForm/RegistrationForm";
+import EntranceForm from './pages/EntranceForm/EntranceForm';
+import ResetPassword from './pages/ResetPassword/ResetPassword';
+import ChatList from "./pages/ChatList/ChatList";
+import Settings from "./pages/Settings/Settings";
+import ChatPage from "./pages/ChatPage/ChatPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+            <Switch>
+                <Route path="/registration">
+                    <RegistrationForm/>
+                </Route>
+                <Route path="/messages">
+                    <ChatPage/>
+                </Route>
+                <Route path="/chat">
+                    <ChatList/>
+                </Route>
+                <Route path="/settings">
+                    <Settings/>
+                </Route>
+                <Route path="/enter">
+                    <EntranceForm/>
+                </Route>
+                <Route path="/password">
+                    <ResetPassword/>
+                </Route>
+            </Switch>
+      </Router>
   );
 }
 

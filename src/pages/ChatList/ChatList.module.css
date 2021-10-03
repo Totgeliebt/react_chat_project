@@ -1,0 +1,17 @@
+.contentWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.list {
+    width: 82%;
+    list-style-type: none;
+    align-self: center;
+    margin-bottom: 50px;
+}
+.createChat {
+    display: flex;
+}
