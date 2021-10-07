@@ -3,14 +3,15 @@ import {createSlice } from '@reduxjs/toolkit'
 export const userDataSlice = createSlice({
     name: 'userData',
     initialState: {
-    value: 'hello'
+    value: []
     },
     reducers: {
-    //     addUserData: (state, action) => {
-    //         if(action.payload !== state.value.userEmail) {
-    //             state.value.push(action.payload)
-    //         }
-    // //     },
+        addUserData: (state, action) => {
+            // state.value = action.payload
+            if(action.payload !== state.value.userEmail) {
+                state.value.push(action.payload)
+            }
+        },
     }
 })
 

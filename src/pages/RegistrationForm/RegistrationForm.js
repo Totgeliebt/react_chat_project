@@ -11,8 +11,6 @@ import {useHistory} from "react-router-dom";
 
 const RegistrationForm = () => {
 
-    const currentUserEmail = useSelector((state)=> state.userData.value)
-    console.log(currentUserEmail)
 const [userName, setUserName] = useState('')
 const [userLastName, setUserLastName] = useState('')
 const [userEmail, setUserEmail] = useState('')
