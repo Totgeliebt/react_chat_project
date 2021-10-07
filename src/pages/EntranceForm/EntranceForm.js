@@ -5,25 +5,38 @@ import MainButton from '../../components/MainButton/MainButton'
 import icon_email from '../RegistrationForm/icon_email.png'
 import icon_password from '../RegistrationForm/icon_password.png'
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {addCurrentUserData} from "../../features/CurrentUserDataSlice/CurrentUserDataSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const EntranceForm = () => {
 
+    // const currentUserEmail = useSelector((state)=> state.userData.value)
+    // console.log(currentUserEmail)
+    // const currentUserPassword = useSelector((state)=> state.userData.value).userPassword
+
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
-
     const handleUserEmail= event => setUserEmail(event.target.value)
     const handleUserPassword= event => setUserPassword(event.target.value)
 
-    const handleDataCheck = (event) => {
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const handleEnter = (event) => {
         event.preventDefault()
-        if (userEmail === userEmail && userPassword === userPassword){
-
-        }
-            }
-
+        dispatch(addCurrentUserData({userEmail, userPassword}))
+        history.push(`chat`)
+        // if (userEmail === currentUserEmail && userPassword === currentUserPassword) {
+        //     history.push(`chat`);
+        // } else if (userEmail === currentUserEmail && userPassword !== currentUserPassword) {
+        //     alert('Вы ввели неверный пароль!')
+        // } else {
+        //     alert('Такого пользователя не существует, пройдите регистрацию')
+        //     history.push(`registration`);
+        // }
+    }
     return(
-        <form onSubmit={handleDataCheck} className={styles.container}>
+        <form onSubmit={handleEnter} className={styles.container}>
             <div className={styles.form}>
                 <div className={styles.avatar}>
                     <img src={avatar} alt="Аватар пользователя"/>

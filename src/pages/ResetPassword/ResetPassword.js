@@ -11,6 +11,7 @@ const ResetPassword = () => {
     const [userPassword, setUserPassword] = useState('')
     const handleUserEmail= event => setUserEmail(event.target.value)
     const handleUserPassword= event => setUserPassword(event.target.value)
+
     return(
         <div className={styles.container}>
             <form className={styles.form}>

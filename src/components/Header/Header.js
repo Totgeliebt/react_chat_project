@@ -2,14 +2,18 @@ import styles from './Header.module.css'
 import userImg from './userImg.png'
 import {Link} from "react-router-dom";
 import React from "react";
+import {useSelector} from "react-redux";
 
 const Header = ({src, text}) => {
+
+    // const userName = useSelector((state)=> state.value.userEmail)
+    // console.log(state.value.userEmail)
     return(
         <div className={styles.header}>
             <div className={styles.wrapper}>
             <div className={styles.user}>
                 <img className={styles.userImage} src={userImg} alt="Аватар"/>
-                <p className={styles.userName}>Username</p>
+                <p className={styles.userName}>username</p>
             </div>
             <Link className={styles.settings} to='/settings'>
                 <img className={styles.settingsImage} src={src} alt="Настройки"/>

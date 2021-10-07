@@ -1,15 +1,20 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {addUserData} from '../features/userDataSlice'
+import userDataSlice from '../features/userDataSlice/userDataSlice'
+import chatSlice from "../features/ChatSlice/ChatSlice";
+import currentUserDataSlice from "../features/CurrentUserDataSlice/CurrentUserDataSlice";
 import storage from 'redux-persist/lib/storage'
 import {persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import {logger} from 'redux-logger'
+
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
 }
 const rootReducer = combineReducers({
-    addUserData: addUserData
+    userDataSlice: userDataSlice,
+    chatSlice: chatSlice,
+    currentUserDataSlice: currentUserDataSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

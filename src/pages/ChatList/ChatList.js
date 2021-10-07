@@ -6,6 +6,9 @@
  import MainButton from "../../components/MainButton/MainButton";
  import MainInput from "../../components/MainInput/MainInput";
  import {useState} from "react";
+ import {useHistory} from "react-router-dom";
+ import {useDispatch} from "react-redux";
+ import {addNewChat} from "../../features/ChatSlice/ChatSlice";
 
  const ChatList = () => {
      const [chatName, setChatName] = useState('')
@@ -13,6 +16,15 @@
      const handleChatName = event => setChatName(event.target.value)
      const handleSearchChat = event => setSearchChat(event.target.value)
 
+     const dispatch = useDispatch()
+     const history = useHistory()
+
+     const handleCreateChat = () => {
+         dispatch(addNewChat({chatName}))
+
+         // history.push(`messages`)
+         // setChatName('')
+     }
     return(
         <>
         <Header text={"Настройки"} src={settingsImg}/>
@@ -20,12 +32,13 @@
                <SearchInput  value={searchChat} onChange={handleSearchChat} />
 
                 <ul className={styles.list}>
-                    <ChatListItem/>
-                    <ChatListItem/>
+                    {
+                        <ChatListItem chatName={chatName}/>
+                    }
                 </ul>
                 <div className={styles.createChat}>
-                <MainButton text={"Создать чат"}/>
-                <MainInput value={chatName} onChange={handleChatName}placeholderValue={"Имя чата"}/>
+                    <MainInput value={chatName} onChange={handleChatName} placeholderValue={"Имя чата"}/>
+                <MainButton onClick={handleCreateChat} text={"Создать чат"}/>
                 </div>
             </div>
         </>
