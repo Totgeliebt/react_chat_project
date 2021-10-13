@@ -16,10 +16,11 @@
 .inputContainer {
     position: relative;
 }
-.input {
+.settingsInput {
     margin: 20px;
     width: 70%;
     border-radius: 15px;
+    height: 70px;
 }
 .pencil{
     background: no-repeat url('./pencilImg.png');

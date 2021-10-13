@@ -14,7 +14,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     userData: userData,
     chat: chat,
-    currentUserData: currentUserData
+    currentUserData: currentUserData,
+
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

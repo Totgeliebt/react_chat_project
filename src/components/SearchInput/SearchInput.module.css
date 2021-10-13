@@ -4,28 +4,32 @@
     border-radius: 10px;
     width: 80%;
     height: 85px;
-   align-items: center;
-    justify-content: space-between;
-
 }
-
+.inputContainer{
+    flex: 4;
+}
 .searchInput {
     border: none;
-
+    height: 100%;
+    width: 90%;
+    padding-left: 20px;
+    font-size: 24px;
 }
 ::placeholder {
     font-size: 20px;
     font-weight: 400;
-   padding-left: 20px;
+
 }
 
 .searchButtonWrapper {
+    position: relative;
+    margin-top: 12px;
     width: 243px;
     height: 60px;
     border-radius: 10px;
     background: linear-gradient(270deg, rgb(100, 118, 244), rgb(50, 70, 211));
     margin-right: 15px;
-    position: relative;
+    flex: 1;
 }
 .search {
     font-size: 20px;
@@ -41,4 +45,5 @@
     position: absolute;
     top: 15px;
     left: 40px;
+
 }

@@ -13,8 +13,6 @@ const EntranceForm = () => {
 
     const currentUsersArray = useSelector((state)=> state.userData.value)
 
-    // const currentUserPassword = useSelector((state)=> state.userData.value)
-    // console.log(currentUser);
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
     const handleUserEmail= event => setUserEmail(event.target.value)
@@ -24,21 +22,16 @@ const EntranceForm = () => {
     const dispatch = useDispatch()
     const handleEnter = (event) => {
         event.preventDefault()
-        const currentUser = currentUsersArray.filter(item => item.userEmail===userEmail)
-        console.log(currentUser)
-        if(currentUser === 'undefined' && currentUser.length === 0) {
+        const currentUserIndex = (currentUsersArray.findIndex(el => el.userEmail === userEmail))
+        if(currentUserIndex === -1) {
             alert('Такого пользователя не существует, пройдите регистрацию')
             history.push(`registration`);
-        } else if (userEmail === currentUser.userEmail && userPassword === currentUser.userPassword) {
-            // dispatch(addCurrentUserData({userEmail, userPassword}))
+        } else if (userPassword === currentUsersArray[currentUserIndex].userPassword) {
+            dispatch(addCurrentUserData(currentUsersArray[currentUserIndex]))
             history.push(`chat`);
-        } else if (userEmail === currentUser.userEmail && userPassword !== currentUser.userPassword) {
+        } else {
             alert('Вы ввели неверный пароль!')
         }
-        // } else {
-        //     alert('Такого пользователя не существует, пройдите регистрацию')
-        //     history.push(`registration`);
-        // }
     }
     return(
         <form onSubmit={handleEnter} className={styles.container}>

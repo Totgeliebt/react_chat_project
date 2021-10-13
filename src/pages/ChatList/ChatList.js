@@ -1,48 +1,72 @@
- import Header from "../../components/Header/Header";
- import settingsImg from '../../components/Header/settingsImg.png'
- import SearchInput from "../../components/SearchInput/SearchInput";
- import styles from './ChatList.module.css'
- import ChatListItem from "../../components/ChatListItem/ChatListItem";
- import MainButton from "../../components/MainButton/MainButton";
- import MainInput from "../../components/MainInput/MainInput";
- import {useState} from "react";
- import {useHistory} from "react-router-dom";
- import {useDispatch} from "react-redux";
- import {addNewChat} from "../../features/ChatSlice/ChatSlice";
+import Header from "../../components/Header/Header";
+import settingsImg from '../../components/Header/settingsImg.png'
+import SearchInput from "../../components/SearchInput/SearchInput";
+import styles from './ChatList.module.css'
+import ChatListItem from "../../components/ChatListItem/ChatListItem";
+import MainButton from "../../components/MainButton/MainButton";
+import MainInput from "../../components/MainInput/MainInput";
+import {useEffect, useState} from "react";
+import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {addNewChat, chosenChat} from "../../features/ChatSlice/ChatSlice";
+import userAvatar from './userAvatar.png'
+import moment from "moment";
 
- const ChatList = () => {
-     const [chatName, setChatName] = useState('')
-     const [searchChat, setSearchChat] = useState('')
-     const handleChatName = event => setChatName(event.target.value)
-     const handleSearchChat = event => setSearchChat(event.target.value)
+const ChatList = () => {
 
-     const dispatch = useDispatch()
-     const history = useHistory()
+    const chatArray = useSelector((state) => state.chat.value)
+    console.log('chatArray', chatArray)
+    // const messagesArray = useSelector((state) => state.chat.value.messages)
+    const currentUserEmail = useSelector((state)=> state.currentUserData.value.userEmail)
 
-     const handleCreateChat = () => {
-         dispatch(addNewChat({chatName}))
+    const [chosenChatId, setChosenChatId]= useState('')
+    const [chatName, setChatName] = useState('')
+    const [searchChat, setSearchChat] = useState('')
+    const handleChatName = event => setChatName(event.target.value)
+    const handleSearchChat = event => setSearchChat(event.target.value)
+    const history = useHistory()
+    const dispatch = useDispatch()
+    const chatItem = {
+        chatName: chatName,
+        messages: [],
+        chatId: currentUserEmail
+    }
+    const handleCreateChat = () => {
+        dispatch(addNewChat({chatItem}))
+        setChatName('')
+    }
 
-         // history.push(`messages`)
-         // setChatName('')
-     }
-    return(
+    useEffect(() => {
+        if(chosenChatId !== ''){
+        dispatch(chosenChat(chosenChatId))
+        history.push(`messages`)}
+    }, [chosenChatId])
+
+    const handleGoToMessages = (index) => {
+        setChosenChatId(index)
+    }
+    return (
         <>
-        <Header text={"Настройки"} src={settingsImg}/>
+            <Header text={"Настройки"} src={settingsImg}/>
             <div className={styles.contentWrapper}>
-               <SearchInput  value={searchChat} onChange={handleSearchChat} />
+                <SearchInput value={searchChat} onChange={handleSearchChat}/>
 
                 <ul className={styles.list}>
                     {
-                        <ChatListItem chatName={chatName}/>
+                        chatArray.map((item, index) => {
+                            return <ChatListItem src={userAvatar} key={index} text={item.chatItem.messages}
+                                                 time={moment().format("HH:mm")}
+                                                 chatName={item.chatItem.chatName} onClick={()=> handleGoToMessages(index)}/>;
+                        })
                     }
                 </ul>
                 <div className={styles.createChat}>
                     <MainInput value={chatName} onChange={handleChatName} placeholderValue={"Имя чата"}/>
-                <MainButton onClick={handleCreateChat} text={"Создать чат"}/>
+                    <MainButton onClick={handleCreateChat} text={"Создать чат"}/>
                 </div>
             </div>
         </>
     )
- }
+}
 
- export default ChatList
+export default ChatList

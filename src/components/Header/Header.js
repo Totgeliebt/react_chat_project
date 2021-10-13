@@ -5,15 +5,13 @@ import React from "react";
 import {useSelector} from "react-redux";
 
 const Header = ({src, text}) => {
-
-    // const userName = useSelector((state)=> state.value.userEmail)
-    // console.log(state.value.userEmail)
+    const currentUserName = useSelector((state)=> state.currentUserData.value.userName)
     return(
         <div className={styles.header}>
             <div className={styles.wrapper}>
             <div className={styles.user}>
                 <img className={styles.userImage} src={userImg} alt="Аватар"/>
-                <p className={styles.userName}>username</p>
+                <p className={styles.userName}>{currentUserName}</p>
             </div>
             <Link className={styles.settings} to='/settings'>
                 <img className={styles.settingsImage} src={src} alt="Настройки"/>

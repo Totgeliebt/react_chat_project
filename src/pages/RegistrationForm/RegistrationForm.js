@@ -5,7 +5,7 @@ import styles from './RegistrationForm.module.css'
 import icon_user from './icon_user.png'
 import icon_email from './icon_email.png'
 import icon_password from './icon_password.png'
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import{ addUserData} from '../../features/userDataSlice/userDataSlice'
 import {useHistory} from "react-router-dom";
 
