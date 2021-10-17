@@ -1,3 +1,9 @@
+This is a study project - chat. It includes 6 pages - registration, authorization, reset password, user settings, create a chat page and messages page. 
+I used React, Redux, React-Redux and Redux-Persist to create this app.
+It is still under development.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
