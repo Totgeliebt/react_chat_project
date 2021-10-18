@@ -5,7 +5,7 @@ import icon_email from '../RegistrationForm/icon_email.png'
 import icon_password from '../RegistrationForm/icon_password.png'
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addCurrentUserData} from "../../features/CurrentUserDataSlice/CurrentUserDataSlice";
+import {resetUserPassword} from "../../features/userDataSlice/userDataSlice";
 import {useHistory} from "react-router-dom";
 
 const ResetPassword = () => {
@@ -24,11 +24,13 @@ const ResetPassword = () => {
     const handleUserPasswordChange = (event) => {
         event.preventDefault()
         const currentUserIndex = (currentUsersArray.findIndex(el => el.userEmail === userEmail))
+        console.log('currentUserIndex', currentUsersArray[currentUserIndex])
         if(currentUserIndex === -1) {
             alert('Такого пользователя не существует, пройдите регистрацию')
             history.push(`registration`);
         } else if (userPassword !== currentUsersArray[currentUserIndex].userPassword) {
-            dispatch(addCurrentUserData(currentUsersArray[currentUserIndex]))
+            dispatch(resetUserPassword(userEmail,userPassword))
+            console.log(userEmail,userPassword)
             history.push(`chat`);
         } else {
             alert('Вы ввели неверный пароль!')

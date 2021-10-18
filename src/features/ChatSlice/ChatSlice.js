@@ -1,33 +1,26 @@
 import {createSlice} from '@reduxjs/toolkit'
+import moment from "moment";
 
 export const chatSlice = createSlice({
     name: 'chat',
     initialState: {
         chosenChat: '',
         value: [
-            {
-                chatName: '',
-                messages: []
-            }
-
+            // {
+            //     // chatName: 'First Chat',
+            //     // messages: ['Last message']
+            // }
         ]
     },
     reducers: {
         addNewChat: (state, action) => {
-            state.value.push(action.payload)
+            state.value.push({...action.payload, createdAt: moment().format("HH:mm")})
         },
         chosenChat: (state, action) => {
             state.chosenChat = action.payload
         },
         addNewMessage: (state, action) => {
-            state.value[chosenChat].messages.push(action.payload)
-           //  console.log(state.value[chosenChat])
-           // state.value.map((item, index) => {
-           //      console.log(index, item)
-           //      if (index === chosenChat) {
-           //          item.messages.push(action.payload)
-           //      }
-           //  })
+            state.value = action.payload
         }
     }
 })

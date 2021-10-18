@@ -10,41 +10,39 @@ import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewChat, chosenChat} from "../../features/ChatSlice/ChatSlice";
 import userAvatar from './userAvatar.png'
-import moment from "moment";
 
 const ChatList = () => {
-
     const chatArray = useSelector((state) => state.chat.value)
-    console.log('chatArray', chatArray)
-    // const messagesArray = useSelector((state) => state.chat.value.messages)
-    const currentUserEmail = useSelector((state)=> state.currentUserData.value.userEmail)
-
-    const [chosenChatId, setChosenChatId]= useState('')
+    const [chosenChatId, setChosenChatId] = useState('')
     const [chatName, setChatName] = useState('')
     const [searchChat, setSearchChat] = useState('')
-    const handleChatName = event => setChatName(event.target.value)
-    const handleSearchChat = event => setSearchChat(event.target.value)
     const history = useHistory()
     const dispatch = useDispatch()
+
+    const handleChatName = event => setChatName(event.target.value)
+    const handleSearchChat = event => setSearchChat(event.target.value)
+
     const chatItem = {
         chatName: chatName,
         messages: [],
-        chatId: currentUserEmail
     }
+
     const handleCreateChat = () => {
-        dispatch(addNewChat({chatItem}))
+        dispatch(addNewChat(chatItem))
         setChatName('')
     }
 
     useEffect(() => {
-        if(chosenChatId !== ''){
-        dispatch(chosenChat(chosenChatId))
-        history.push(`messages`)}
+        if (chosenChatId !== '') {
+            dispatch(chosenChat(chosenChatId))
+            history.push(`messages`)
+        }
     }, [chosenChatId])
 
     const handleGoToMessages = (index) => {
         setChosenChatId(index)
     }
+
     return (
         <>
             <Header text={"Настройки"} src={settingsImg}/>
@@ -54,9 +52,11 @@ const ChatList = () => {
                 <ul className={styles.list}>
                     {
                         chatArray.map((item, index) => {
-                            return <ChatListItem src={userAvatar} key={index} text={item.chatItem.messages}
-                                                 time={moment().format("HH:mm")}
-                                                 chatName={item.chatItem.chatName} onClick={()=> handleGoToMessages(index)}/>;
+                            return <ChatListItem src={userAvatar} key={index}
+                                                 text={item.messages[item.messages.length-1]?.text}
+                                                 time={item.createdAt}
+                                                 chatName={item.chatName}
+                                                 onClick={() => handleGoToMessages(index)}/>;
                         })
                     }
                 </ul>
